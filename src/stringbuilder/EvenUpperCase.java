@@ -43,26 +43,30 @@ class EvenUpperCase {
         str.reverse();
         ArrayList<Character> secretCode = new ArrayList<>();
         secretCode = removeDuplicate(str);
-        ArrayList<Character> arrayWithoutZero = new ArrayList<>();
-        for (int i = 0; i < secretCode.toArray().length; i++) {
-            if (secretCode.get(i) != '0') {
-                arrayWithoutZero.add(secretCode.get(i));
+        ArrayList<Integer> array = new ArrayList<>();
+        if (length == 1) {
+            ArrayList<Character> arrayWithoutZero = new ArrayList<>();
+            for (int i = 0; i < secretCode.toArray().length; i++) {
+                if (secretCode.get(i) != '0') {
+                    arrayWithoutZero.add(secretCode.get(i));
+                }
             }
-        }        ArrayList<Integer> array = new ArrayList<>();
-
-        if (length <= 10) {
-            int i;
-
-            for (i = 0; i < 1; i++) {
+            for (int i = 0; i < length; i++) {
                 array.add(Character.getNumericValue(arrayWithoutZero.get(i)));
             }
-            for (i = 1; i < length; i++) {
+            StringBuilder strNew = new StringBuilder();
+            for (int j = 0; j < length; j++) {
+                strNew.append(array.get(j));
+            }
+            System.out.printf("The random secret number is %s.", strNew);
+        } else if (length <= 10 && length > 1) {
+            for (int i = 0; i < length; i++) {
                 array.add(Character.getNumericValue(secretCode.get(i)));
             }
 
-/*            while (array.get(0) == 0) {
+            while (array.get(0) == 0) {
                 Collections.shuffle(array);
-            }*/
+            }
             StringBuilder strNew = new StringBuilder();
             for (int j = 0; j < length; j++) {
                 strNew.append(array.get(j));
