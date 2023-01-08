@@ -29,41 +29,43 @@ class EvenUpperCase {
                 secretCode.add(array[i]);
             }
         }
+        secretCode.add(array[array.length - 1]);
         return secretCode;
     }
     public static void SecretCodegenerator(int length) {
-        long pseudoRandomNumber = System.nanoTime();
+        //long pseudoRandomNumber = System.nanoTime();
+        ArrayList<Integer> pseudoRandomNumber = new ArrayList<>(List.of(0,9,8,9,7,6,3,3,5,4,4,2,1));
         StringBuilder str = new StringBuilder();
-        str.append(pseudoRandomNumber).reverse();
+        for (Integer variable : pseudoRandomNumber
+             ) {
+            str.append(variable);
+        }
+        str.reverse();
         ArrayList<Character> secretCode = new ArrayList<>();
         secretCode = removeDuplicate(str);
-        ArrayList<Integer> array = new ArrayList<>();
         ArrayList<Character> arrayWithoutZero = new ArrayList<>();
-        if (length == 1) {
-            for (int i = 0; i < secretCode.toArray().length; i++) {
-                if (secretCode.get(i) != '0') {
-                    arrayWithoutZero.add(secretCode.get(i));
-                }
+        for (int i = 0; i < secretCode.toArray().length; i++) {
+            if (secretCode.get(i) != '0') {
+                arrayWithoutZero.add(secretCode.get(i));
             }
-            for (int i = 0; i < length; i++) {
+        }        ArrayList<Integer> array = new ArrayList<>();
+
+        if (length <= 10) {
+            int i;
+
+            for (i = 0; i < 1; i++) {
                 array.add(Character.getNumericValue(arrayWithoutZero.get(i)));
             }
-            StringBuilder strNew = new StringBuilder();
-            for (int i = 0; i < length; i++) {
-                strNew.append(array.get(i));
-            }
-            System.out.printf("The random secret number is %s.", strNew);
-        } else if (length <= 10 && length > 1) {
-            for (int i = 0; i < length; i++) {
+            for (i = 1; i < length; i++) {
                 array.add(Character.getNumericValue(secretCode.get(i)));
             }
 
-            while (array.get(0) == 0) {
+/*            while (array.get(0) == 0) {
                 Collections.shuffle(array);
-            }
+            }*/
             StringBuilder strNew = new StringBuilder();
-            for (int i = 0; i < length; i++) {
-                strNew.append(array.get(i));
+            for (int j = 0; j < length; j++) {
+                strNew.append(array.get(j));
             }
             System.out.printf("The random secret number is %s.", strNew);
         } else {
