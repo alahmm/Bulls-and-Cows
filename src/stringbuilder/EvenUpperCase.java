@@ -46,7 +46,7 @@ class EvenUpperCase {
                 } else {
                     System.out.printf("Grade: %d bull and %d cow%n", counterBulls, counterCows);
                 }
-            } else if (counterBulls == 4) {
+            } else if (counterBulls == input.length()) {
                 System.out.printf("Grade: %d bulls%n", counterBulls);
                 System.out.println("Congratulations! You guessed the secret code.");
             }else if (counterBulls == 0 && counterCows != 0) {
@@ -122,9 +122,9 @@ class EvenUpperCase {
                 strNew.append(array.get(j));
             }
             //System.out.printf("The random secret number is %s.", strNew);
-        } /*else {
+        } else {
             System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
-        }*/
+        }
         return strNew;
     }
 
@@ -143,7 +143,7 @@ class EvenUpperCase {
             //counter++;
             String input = scanner.next();
             int variableNew = Grader(input, variable);
-            if (variableNew == 4) {
+            if (variableNew == length) {
                 return;
             }
         }
