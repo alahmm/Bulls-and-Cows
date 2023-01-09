@@ -36,7 +36,7 @@ class EvenUpperCase {
                     }
                 }
             }
-            if (counterBulls != 0 && counterCows != 0 && counterBulls != 4) {
+            if (counterBulls != 0 && counterCows != 0) {
                 if (counterCows != 1 && counterBulls != 1) {
                     System.out.printf("Grade: %d bulls and %d cows%n", counterBulls, counterCows);
                 } else if (counterCows !=1) {
