@@ -63,16 +63,14 @@ public class EvenUpperCaseWithRandom {
         Collections.shuffle(randomSecretCode);
         ArrayList<Character> array = new ArrayList<>();
         StringBuilder strNew = new StringBuilder();
-        if (length <= 36) {
+
             for (int i = 0; i < length; i++) {
                 array.add(randomSecretCode.get(i));
             }
             for (int j = 0; j < length; j++) {
                 strNew.append(array.get(j));
             }
-        } else {
-            System.out.println("Error: can't generate a secret number with a length of 11 because there aren't enough unique digits.");
-        }
+
         return strNew;
     }
 
@@ -80,41 +78,58 @@ public class EvenUpperCaseWithRandom {
     public static void main(String[] args) {
         System.out.println("Input the length of the secret code:");
         Scanner scanner = new Scanner(System.in);
-        int length = scanner.nextInt();
-        System.out.println("Input the number of possible symbols in the code:");
-        int lengthOfPossibleSymbols = scanner.nextInt();
-        if (lengthOfPossibleSymbols <= 10) {
-            System.out.print("The secret is prepared: ");
-            for (int i = 0; i < length; i++) {
-                System.out.print("*");
-            }
-            System.out.printf(" (0-%d).%n", lengthOfPossibleSymbols - 1);
-        } else if (lengthOfPossibleSymbols == 11){
-            System.out.print("The secret is prepared: ");
-            for (int i = 0; i < length; i++) {
-                System.out.print("*");
-            }
-            System.out.println(" (0-9, a).");
-        } else {
-            char variable = (char)(lengthOfPossibleSymbols + 86);
-            System.out.print("The secret is prepared: ");
-            for (int i = 0; i < length; i++) {
-                System.out.print("*");
-            }
-            System.out.printf(" (0-9, a-%c).%n", variable);
-
-        }
-        StringBuilder variable = SecretCodegenerator(length, lengthOfPossibleSymbols);
-        System.out.println("Okay, let's start a game!");
-        int counter = 1;
-        while (scanner.hasNextLine()) {
-            System.out.printf("Turn %s:", counter++);
-            System.out.println();
-            String input = scanner.next();
-            int variableNew = Grader(input, variable);
-            if (variableNew == length) {
+        String input = scanner.nextLine();
+        try {
+            int length = Integer.parseInt(input);
+            if (length == 0) {
+                System.out.println("Error: you can not enter a code with length 0");
                 return;
             }
+            System.out.println("Input the number of possible symbols in the code:");
+            int lengthOfPossibleSymbols = scanner.nextInt();
+            if (lengthOfPossibleSymbols < length) {
+                System.out.printf("Error: it's not possible to generate a code with a length of %d with %d unique symbols.", length, lengthOfPossibleSymbols);
+                return;
+            }
+            if (lengthOfPossibleSymbols > 36) {
+                System.out.println("Error: maximum number of possible symbols in the code is 36 (0-9, a-z).");
+                return;
+            }
+            if (lengthOfPossibleSymbols <= 10) {
+                System.out.print("The secret is prepared: ");
+                for (int i = 0; i < length; i++) {
+                    System.out.print("*");
+                }
+                System.out.printf(" (0-%d).%n", lengthOfPossibleSymbols - 1);
+            } else if (lengthOfPossibleSymbols == 11){
+                System.out.print("The secret is prepared: ");
+                for (int i = 0; i < length; i++) {
+                    System.out.print("*");
+                }
+                System.out.println(" (0-9, a).");
+            } else {
+                char variable = (char)(lengthOfPossibleSymbols + 86);
+                System.out.print("The secret is prepared: ");
+                for (int i = 0; i < length; i++) {
+                    System.out.print("*");
+                }
+                System.out.printf(" (0-9, a-%c).%n", variable);
+
+            }
+            StringBuilder variable = SecretCodegenerator(length, lengthOfPossibleSymbols);
+            System.out.println("Okay, let's start a game!");
+            int counter = 1;
+            while (scanner.hasNextLine()) {
+                System.out.printf("Turn %s:", counter++);
+                System.out.println();
+                String inputNew = scanner.next();
+                int variableNew = Grader(inputNew, variable);
+                if (variableNew == length) {
+                    return;
+                }
+            }
+        }catch (NumberFormatException ex) {
+            System.out.printf("Error: \"%s\" isn't a valid number.", input);
         }
     }
 }
