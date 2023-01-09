@@ -3,20 +3,6 @@ package random_numbers;
 import java.util.*;
 
 public class EvenUpperCaseWithRandom {
-    public static String upperEvenLetters(String message) {
-        // write your code here
-        StringBuilder stringNew = new StringBuilder();
-        for (int i = 0; i < message.length(); i++) {
-            if (i % 2 == 0) {
-                stringNew.append(Character.toUpperCase(message.charAt(i)));
-            } else {
-                stringNew.append(message.charAt(i));
-
-            }
-
-        }
-        return stringNew.toString();
-    }
     public static int Grader(String input, StringBuilder predefinedCode) {
         int counterBulls = 0;
         int counterCows = 0;
@@ -66,20 +52,6 @@ public class EvenUpperCaseWithRandom {
 
         return counterBulls;
     }
-    static ArrayList<Character> removeDuplicate(StringBuilder input)
-    {
-        String string = input.toString();
-        char[] array = string.toCharArray();
-        Arrays.sort(array);
-        ArrayList<Character> secretCode = new ArrayList<>();
-        for (int i=0; i<array.length-1; i++){
-            if (array[i] != array[i+1]){
-                secretCode.add(array[i]);
-            }
-        }
-        secretCode.add(array[array.length - 1]);
-        return secretCode;
-    }
     public static StringBuilder SecretCodegenerator(int length, int lengthOfPossibleCharacters) {
         ArrayList<Character> secretCode = new ArrayList<>(List.of('0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
@@ -108,7 +80,6 @@ public class EvenUpperCaseWithRandom {
     public static void main(String[] args) {
         System.out.println("Input the length of the secret code:");
         Scanner scanner = new Scanner(System.in);
-        //String message = scanner.nextLine();
         int length = scanner.nextInt();
         System.out.println("Input the number of possible symbols in the code:");
         int lengthOfPossibleSymbols = scanner.nextInt();
@@ -139,7 +110,6 @@ public class EvenUpperCaseWithRandom {
         while (scanner.hasNextLine()) {
             System.out.printf("Turn %s:", counter++);
             System.out.println();
-            //counter++;
             String input = scanner.next();
             int variableNew = Grader(input, variable);
             if (variableNew == length) {
